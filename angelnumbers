@@ -1,0 +1,61 @@
+import React, { useState } from 'react';
+
+// Angel number meanings
+const angelNumberMeanings = {
+  111: 'New beginnings',
+  222: 'Stay positive',
+  333: 'Angels are communicating with you',
+  444: 'You are on the right path',
+  555: 'Significant changes are coming',
+  666: 'Focus on the material plane',
+  777: 'Spiritual awakening',
+  888: 'Abundance and prosperity',
+  999: 'Completion of a life cycle'
+};
+
+const AngelNumberLookup = () => {
+  const [inputNumber, setInputNumber] = useState('');
+  const [meaning, setMeaning] = useState('');
+
+  const handleInputChange = (event) => {
+    setInputNumber(event.target.value);
+  };
+
+  const lookupAngelNumber = () => {
+    const number = parseInt(inputNumber);
+    if (angelNumberMeanings[number]) {
+      setMeaning(angelNumberMeanings[number]);
+    } else {
+      setMeaning('No meaning found for this angel number');
+    }
+  };
+
+  return (
+    <div className="w-full max-w-md bg-white rounded-lg shadow-md p-6 space-y-4">
+      <div className="text-2xl font-bold">Angel Number Lookup</div>
+      <div className="space-y-2">
+        <input
+          type="number"
+          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          placeholder="Enter an angel number"
+          value={inputNumber}
+          onChange={handleInputChange}
+        />
+        <button
+          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+          onClick={lookupAngelNumber}
+        >
+          Look up
+        </button>
+        {meaning && (
+          <div className="bg-gray-100 p-4 rounded">
+            <div className="font-medium">{inputNumber}</div>
+            <div>{meaning}</div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default AngelNumberLookup;
